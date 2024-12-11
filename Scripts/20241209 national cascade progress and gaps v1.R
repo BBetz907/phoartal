@@ -83,7 +83,7 @@ slope <-  dfnat %>%
       filter(!is.na(percent_change)) %>%
       mutate(yeartype = if_else(year==max(year), "present", "other")) %>% 
       ggplot(aes(x=year, y=percent_change, group = indicator)) +
-        geom_line(size=1.5, color = grey50k) + 
+        geom_line(size=1.5, color = "#808080") + 
       
         geom_point(aes(
                       # shape = yeartype, 
@@ -101,7 +101,7 @@ slope <-  dfnat %>%
         values = c("present" = 1, "other" = 16) # 1 = empty circle, 16 = filled circle
       ) +
       scale_color_manual(
-        values = c("present" = grey80k, "other" = grey50k),
+        values = c("present" = grey80k, "other" = "#808080"),
         name = NULL) +
           facet_grid(cols = vars(indicator)) +
       scale_y_continuous(limits = c(0,70)) +
