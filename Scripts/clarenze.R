@@ -1,6 +1,1 @@
-library(glamr)
-
-si_setup()
-
-another amazing thing
-
+i dont like her anymore. i don't care'
