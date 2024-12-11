@@ -19,23 +19,7 @@
   library(glue)
   library(readxl)
 
-# GLOBAL VARIABLES --------------------------------------------------------
-    
-  # Create folder structure
-    # glamr::si_setup()
-  # SI specific paths/functions  
-    # load_secrets()
 
-
-# IMPORT ------------------------------------------------------------------
-filepath <- return_latest(folderpath = "Data/", pattern = "^20[0-9]{2}\\_Cascade")
-
-  # read_psd
-  # 
-  # # Grab metadata
-  #   metadata <- get_metadata(filepath) 
-  # 
-  ref_id <- "22eb92ad"
 
 # MUNGE -------------------------------------------------------------------
 
@@ -67,15 +51,6 @@ filepath <- return_latest(folderpath = "Data/", pattern = "^20[0-9]{2}\\_Cascade
   ## identify indicators for slope
   slope_indicators <- c("diagnosed PLHIV", "PLHIV on ART", "PLHIV Virally Suppressed")
   bar_indicators <- c("PLHIV to be diagnosed", "PLHIV to be enrolled on ART", "PLHIV not virally suppressed")
-  
-  # munge
-    dfreg <- read_xlsx(path = filepath, sheet = "Sheet2", range = "A1:M16") %>% 
-    pivot_longer(cols=3:last_col(), names_to = "indicator") %>% 
-    rename(region = NAME_REG) %>% 
-    mutate(source = "shared file") %>%   
-    janitor::clean_names() %>% 
-      percent_change() %>% #apply local function
-    glimpse()
   
 
   dfnat <- data.frame(year=c(2022,2023,2024), 
@@ -184,5 +159,6 @@ bar <-    dfnat %>%
     
 output <-  slope / bar   + plot_layout(ncol = 1, heights = c(1,1.5)) 
     
-    
+    output
+        
 ggsave(plot = output, filename = "Images/cascade_contrast.png", width = 8, height = 3.75)    
